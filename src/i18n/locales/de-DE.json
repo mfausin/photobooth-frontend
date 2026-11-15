@@ -269,5 +269,22 @@
   "Font": "Schriftart",
   "Choose a font, otherwise creating the collage fails.": "Wähle eine Schriftart, sonst schlägt das Erstellen der Collage fehl.",
   "Select a text in the preview or the list to edit it.": "Wähle einen Text in der Vorschau oder in der Liste aus, um ihn zu bearbeiten.",
-  "Your text": "Dein Text"
+  "Your text": "Dein Text",
+  "Printer": "Drucker",
+  "Refresh": "Aktualisieren",
+  "No printers set up in CUPS.": "In CUPS ist kein Drucker eingerichtet.",
+  "Does not accept new jobs.": "Nimmt keine neuen Aufträge an.",
+  "{count} jobs in queue": "{count} Aufträge in der Warteschlange",
+  "Resume printer": "Drucker fortsetzen",
+  "Clear queue": "Warteschlange leeren",
+  "Automatic resume after errors is on.": "Automatisches Fortsetzen nach Fehlern ist aktiv.",
+  "After an error (e.g. paper or ribbon empty) CUPS stops the printer until it is resumed manually.": "Nach einem Fehler (z. B. Papier oder Farbband leer) hält CUPS den Drucker an, bis er von Hand fortgesetzt wird.",
+  "Resume automatically after errors": "Nach Fehlern automatisch fortsetzen",
+  "Cancel all {count} jobs of {printer}? Pending prints are lost.": "Alle {count} Aufträge von {printer} abbrechen? Ausstehende Drucke gehen verloren.",
+  "Ready": "Bereit",
+  "Printing": "Druckt",
+  "Stopped": "Angehalten",
+  "Unknown": "Unbekannt",
+  "Printer action failed": "Druckeraktion fehlgeschlagen",
+  "Done.": "Erledigt."
 }

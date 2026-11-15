@@ -269,5 +269,22 @@
   "Font": "Font",
   "Choose a font, otherwise creating the collage fails.": "Choose a font, otherwise creating the collage fails.",
   "Select a text in the preview or the list to edit it.": "Select a text in the preview or the list to edit it.",
-  "Your text": "Your text"
+  "Your text": "Your text",
+  "Printer": "Printer",
+  "Refresh": "Refresh",
+  "No printers set up in CUPS.": "No printers set up in CUPS.",
+  "Does not accept new jobs.": "Does not accept new jobs.",
+  "{count} jobs in queue": "{count} jobs in queue",
+  "Resume printer": "Resume printer",
+  "Clear queue": "Clear queue",
+  "Automatic resume after errors is on.": "Automatic resume after errors is on.",
+  "After an error (e.g. paper or ribbon empty) CUPS stops the printer until it is resumed manually.": "After an error (e.g. paper or ribbon empty) CUPS stops the printer until it is resumed manually.",
+  "Resume automatically after errors": "Resume automatically after errors",
+  "Cancel all {count} jobs of {printer}? Pending prints are lost.": "Cancel all {count} jobs of {printer}? Pending prints are lost.",
+  "Ready": "Ready",
+  "Printing": "Printing",
+  "Stopped": "Stopped",
+  "Unknown": "Unknown",
+  "Printer action failed": "Printer action failed",
+  "Done.": "Done."
 }
