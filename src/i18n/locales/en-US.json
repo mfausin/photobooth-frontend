@@ -286,5 +286,8 @@
   "Stopped": "Stopped",
   "Unknown": "Unknown",
   "Printer action failed": "Printer action failed",
-  "Done.": "Done."
+  "Done.": "Done.",
+  "Not connected": "Not connected",
+  "connected via USB": "connected via USB",
+  "The printer is not plugged in via USB. Check cable and power.": "The printer is not plugged in via USB. Check cable and power."
 }
