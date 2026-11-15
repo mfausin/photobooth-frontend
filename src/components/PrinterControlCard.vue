@@ -18,9 +18,22 @@
           <q-item-section>
             <q-item-label class="row items-center no-wrap q-gutter-x-sm">
               <q-badge :color="stateColor(printer)" :label="stateLabel(printer)" />
+              <q-badge v-if="printer.connected === false" color="negative" outline>
+                <q-icon name="sym_o_usb_off" size="14px" class="q-mr-xs" />{{ $t('Not connected') }}
+              </q-badge>
               <span class="text-weight-medium ellipsis">{{ printer.info || printer.name }}</span>
             </q-item-label>
-            <q-item-label caption>{{ printer.name }}</q-item-label>
+            <q-item-label caption class="row items-center q-gutter-x-xs">
+              <span>{{ printer.name }}</span>
+              <template v-if="printer.connected === true">
+                <q-icon name="sym_o_usb" />
+                <span>{{ $t('connected via USB') }}</span>
+              </template>
+            </q-item-label>
+
+            <q-item-label v-if="printer.connected === false" class="text-negative">
+              {{ $t('The printer is not plugged in via USB. Check cable and power.') }}
+            </q-item-label>
 
             <q-item-label v-if="!printer.accepting_jobs" class="text-warning">{{ $t('Does not accept new jobs.') }}</q-item-label>
             <q-item-label v-if="printer.state_message" class="text-body2">{{ printer.state_message }}</q-item-label>
@@ -129,6 +142,9 @@ interface PrinterInfo {
   accepting_jobs: boolean
   queued_jobs: number
   error_policy: string | null
+  connection?: 'usb' | 'network' | 'other'
+  /** only known for USB printers: is the device plugged in right now */
+  connected?: boolean | null
 }
 
 const API = '/api/admin/printer-control/printers'

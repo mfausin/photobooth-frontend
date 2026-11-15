@@ -222,5 +222,8 @@
   "Stopped": "Angehalten",
   "Unknown": "Unbekannt",
   "Printer action failed": "Druckeraktion fehlgeschlagen",
-  "Done.": "Erledigt."
+  "Done.": "Erledigt.",
+  "Not connected": "Nicht verbunden",
+  "connected via USB": "per USB verbunden",
+  "The printer is not plugged in via USB. Check cable and power.": "Der Drucker ist nicht per USB angeschlossen. Kabel und Strom prüfen."
 }
