@@ -1,6 +1,8 @@
 <template>
   <q-page id="admin-page" padding>
     <div class="row col-xs-12 col-sm-4 col-md-3 col-lg-3">
+      <printer-control-card />
+
       <q-card flat class="q-mr-md q-mb-md">
         <q-card-section>
           <q-list>
@@ -544,6 +546,7 @@ import { useMainStore } from '@/stores/main-store'
 import { remoteProcedureCall } from '@/util/fetch_api.js'
 import { useI18n } from 'vue-i18n'
 import { getLanguageName, preferredLanguages, enableInContextTranslation } from '@/boot/i18n'
+import PrinterControlCard from '@/components/PrinterControlCard.vue'
 import DashboardGenericStatsCard from '@/components/DashboardGenericStatsCard.vue'
 
 const { locale } = useI18n({ useScope: 'global' })

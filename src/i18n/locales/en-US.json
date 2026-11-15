@@ -205,5 +205,22 @@
       "paragraph1": "✅️ You made it! At this point you can check the calibration result. Click the capture button to trigger the camera array and compile an animated image.",
       "paragraph2": "If your image looks good, you can continue setup the actions in the configuration. Otherwise you might want to start over."
     }
-  }
+  },
+  "Printer": "Printer",
+  "Refresh": "Refresh",
+  "No printers set up in CUPS.": "No printers set up in CUPS.",
+  "Does not accept new jobs.": "Does not accept new jobs.",
+  "{count} jobs in queue": "{count} jobs in queue",
+  "Resume printer": "Resume printer",
+  "Clear queue": "Clear queue",
+  "Automatic resume after errors is on.": "Automatic resume after errors is on.",
+  "After an error (e.g. paper or ribbon empty) CUPS stops the printer until it is resumed manually.": "After an error (e.g. paper or ribbon empty) CUPS stops the printer until it is resumed manually.",
+  "Resume automatically after errors": "Resume automatically after errors",
+  "Cancel all {count} jobs of {printer}? Pending prints are lost.": "Cancel all {count} jobs of {printer}? Pending prints are lost.",
+  "Ready": "Ready",
+  "Printing": "Printing",
+  "Stopped": "Stopped",
+  "Unknown": "Unknown",
+  "Printer action failed": "Printer action failed",
+  "Done.": "Done."
 }
