@@ -71,7 +71,7 @@
       </q-card-section>
 
       <q-card-actions align="center">
-        <q-btn stack no-caps color="primary" class="q-ma-sm" type="submit" v-close-popup size="md" padding="md lg">
+        <q-btn stack no-caps color="primary" class="q-ma-sm" type="submit" size="md" padding="md lg">
           <q-icon v-if="!isEmpty(parameters_dialog_action_icon)" :name="`sym_o_${parameters_dialog_action_icon}`" />
           <div>{{ parameters_dialog_action_label }}</div>
         </q-btn>
@@ -86,14 +86,14 @@ import { onBeforeMount } from 'vue'
 import { isEmpty } from 'lodash'
 const formData = reactive<Record<string, any>>({})
 
-import type { components } from '@/dto/api'
+import type { ShareProcessingParameters } from '@/dto/generated'
 
 const props = defineProps<{
   config_index: number
   parameters_dialog_caption: string
   parameters_dialog_action_icon: string
   parameters_dialog_action_label: string
-  parameters: components['schemas']['ShareProcessingParameters'][]
+  parameters: ShareProcessingParameters[]
 }>()
 
 const emit = defineEmits<{
