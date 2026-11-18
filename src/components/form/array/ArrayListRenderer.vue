@@ -1,5 +1,9 @@
 <template>
-  <div :class="styles.arrayList.label">{{ control.label }}</div>
+  <div class="row items-center justify-between q-gutter-y-xs">
+    <div :class="styles.arrayList.label" class="q-mr-md">{{ control.label }}</div>
+    <!-- extra actions of specialized array renderers -->
+    <slot name="actions" />
+  </div>
   <div :class="styles.arrayList.description">{{ control.description }}</div>
 
   <q-card v-if="control.visible" flat :class="styles.arrayList.root">

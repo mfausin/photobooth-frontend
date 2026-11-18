@@ -392,6 +392,92 @@ export type GenericStats = {
 };
 
 /**
+ * Gphoto2CameraConfig
+ *
+ * Configuration of the connected camera at the time it was read.
+ */
+export type Gphoto2CameraConfig = {
+    /**
+     * Model
+     *
+     * Camera model, if the camera reports it.
+     */
+    model: string | null;
+    /**
+     * Parameter holding the exposure mode (e.g. Manual, Av, Tv). None if the camera has no known mode parameter.
+     */
+    mode: Gphoto2ConfigWidget | null;
+    /**
+     * Widgets
+     */
+    widgets: Array<Gphoto2ConfigWidget>;
+};
+
+/**
+ * Gphoto2ConfigWidget
+ *
+ * One camera parameter as reported by the camera.
+ */
+export type Gphoto2ConfigWidget = {
+    /**
+     * Name
+     *
+     * Name to use in the parameter sets, e.g. 'iso'.
+     */
+    name: string;
+    /**
+     * Label
+     *
+     * Human readable label reported by the camera driver (language depends on the system locale).
+     */
+    label: string;
+    /**
+     * Section
+     *
+     * Label of the section the parameter belongs to, e.g. 'Capture Settings'.
+     */
+    section: string;
+    /**
+     * Type
+     */
+    type: 'text' | 'range' | 'toggle' | 'radio' | 'menu' | 'button' | 'date' | 'unknown';
+    /**
+     * Readonly
+     */
+    readonly: boolean;
+    /**
+     * Settable
+     *
+     * True if the app can set this parameter (writable and a supported type).
+     */
+    settable: boolean;
+    /**
+     * Value
+     *
+     * Current value, converted to text the same way it is entered in the parameter sets.
+     */
+    value: string;
+    /**
+     * Choices
+     *
+     * Allowed values for radio and menu parameters in the camera's current mode.
+     */
+    choices?: Array<string>;
+    /**
+     * Range Min
+     */
+    range_min?: number | null;
+    /**
+     * Range Max
+     */
+    range_max?: number | null;
+    /**
+     * Range Step
+     */
+    range_step?: number | null;
+};
+
+/**
  * Gphoto2 Parameters
  *
  * Configure different settings when switching between modes.
@@ -2565,6 +2651,36 @@ export type ApiGalleryDeleteApiMediacollectionItemIdDeleteResponses = {
      */
     200: unknown;
 };
+
+export type ApiGetGphoto2CameraConfigApiAdminCamerasGphoto2ConfigIndexConfigGetData = {
+    body?: never;
+    path: {
+        /**
+         * Config Index
+         */
+        config_index: number;
+    };
+    query?: never;
+    url: '/api/admin/cameras/gphoto2/{config_index}/config';
+};
+
+export type ApiGetGphoto2CameraConfigApiAdminCamerasGphoto2ConfigIndexConfigGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type ApiGetGphoto2CameraConfigApiAdminCamerasGphoto2ConfigIndexConfigGetError = ApiGetGphoto2CameraConfigApiAdminCamerasGphoto2ConfigIndexConfigGetErrors[keyof ApiGetGphoto2CameraConfigApiAdminCamerasGphoto2ConfigIndexConfigGetErrors];
+
+export type ApiGetGphoto2CameraConfigApiAdminCamerasGphoto2ConfigIndexConfigGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: Gphoto2CameraConfig;
+};
+
+export type ApiGetGphoto2CameraConfigApiAdminCamerasGphoto2ConfigIndexConfigGetResponse = ApiGetGphoto2CameraConfigApiAdminCamerasGphoto2ConfigIndexConfigGetResponses[keyof ApiGetGphoto2CameraConfigApiAdminCamerasGphoto2ConfigIndexConfigGetResponses];
 
 export type ApiGetitemApiMediacollectionItemIdGetData = {
     body?: never;
