@@ -23,6 +23,9 @@ import { default as EnumArrayRenderer } from './EnumArrayRenderer.vue'
 import { default as ObjectRenderer } from './ObjectRenderer.vue'
 import { default as CollageProcessingRenderer } from './CollageProcessingRenderer.vue'
 import { default as CollageEditorButtonRenderer } from './CollageEditorButtonRenderer.vue'
+import { default as Gphoto2BackendRenderer } from './Gphoto2BackendRenderer.vue'
+import { default as Gphoto2LayoutRedirect } from './Gphoto2LayoutRedirect.vue'
+import { GPHOTO2_DETAIL_OPTION } from './gphoto2'
 import { COLLAGE_EDITOR_BUTTON } from '@/components/collage/collage'
 // import { default as OneOfRenderer } from "./OneOfRenderer.vue";
 import { default as OneOfTabRenderer } from './OneOfTabRenderer.vue'
@@ -89,6 +92,25 @@ export const CollageProcessingRendererEntry: JsonFormsRendererRegistryEntry = {
   tester: rankWith(2.5, and(isObjectControl, schemaMatches(isCollageProcessing))),
 }
 
+// gphoto2 backend settings: parameter sets can be chosen from the connected camera
+const isGphoto2Backend = (schema: JsonSchema): boolean =>
+  schema.type === 'object' && !!schema.properties?.parameter_configuration && !!schema.properties?.parameterset_still
+
+export const Gphoto2BackendRendererEntry: JsonFormsRendererRegistryEntry = {
+  renderer: Gphoto2BackendRenderer,
+  tester: rankWith(2.5, and(isObjectControl, schemaMatches(isGphoto2Backend))),
+}
+
+// oneOf tabs render the gphoto2 option as layout: redirect it to the renderer above.
+// the renderer's own detail layout is marked, otherwise it would be redirected again.
+const isGphoto2Layout: Tester = (uischema, schema) =>
+  ['VerticalLayout', 'Group', 'HorizontalLayout'].includes(uischema.type) && !uischema.options?.[GPHOTO2_DETAIL_OPTION] && isGphoto2Backend(schema)
+
+const Gphoto2LayoutRedirectEntry: JsonFormsRendererRegistryEntry = {
+  renderer: Gphoto2LayoutRedirect,
+  tester: rankWith(10, isGphoto2Layout),
+}
+
 const CollageEditorButtonRendererEntry: JsonFormsRendererRegistryEntry = {
   renderer: CollageEditorButtonRenderer,
   tester: rankWith(10, uiTypeIs(COLLAGE_EDITOR_BUTTON)),
@@ -108,6 +130,8 @@ export const complexRenderers = [
   ObjectRendererEntry,
   CollageProcessingRendererEntry,
   CollageEditorButtonRendererEntry,
+  Gphoto2BackendRendererEntry,
+  Gphoto2LayoutRedirectEntry,
   // oneOfRendererEntry,
   oneOfTabRendererEntry,
 ]
