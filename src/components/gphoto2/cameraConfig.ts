@@ -1,12 +1,8 @@
 import { reactive } from 'vue'
-import { useLocalStorage } from '@vueuse/core'
 import { _fetch } from '@/util/fetch_api'
 import type { Gphoto2CameraConfig, Gphoto2ConfigWidget, Gphoto2Parameters } from '@/dto/generated'
 
 export type { Gphoto2CameraConfig, Gphoto2ConfigWidget, Gphoto2Parameters }
-
-/** Offer the parameters read from the camera in the config form. Off = only the manual list (fallback). */
-export const useGphoto2ParameterDiscovery = () => useLocalStorage('gphoto2ParameterDiscovery', true)
 
 /** Index of the backend in cameras.group_backends, taken from a form path like "group_backends.1.backend_config.parameterset_still". */
 export const backendIndexFromPath = (path: string): number => {
@@ -52,6 +48,9 @@ export async function readCameraConfig(backendIndex: number, force = false): Pro
   cache.set(backendIndex, entry)
   return entry
 }
+
+/** Mode as stored in camera_mode_at_configuration ('name=value'), empty if the camera has no known mode parameter. */
+export const cameraModeString = (config: Gphoto2CameraConfig): string => (config.mode ? `${config.mode.name}=${config.mode.value}` : '')
 
 /** Value the camera reports for a widget, as used in the parameter sets. */
 export const defaultValueFor = (widget: Gphoto2ConfigWidget): string => {

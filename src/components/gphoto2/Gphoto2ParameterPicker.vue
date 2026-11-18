@@ -50,12 +50,14 @@
       </div>
     </q-card-section>
 
-    <q-card-section v-if="cameraConfig" class="row items-center q-gutter-sm q-py-none">
-      <q-input v-model="filter" dense outlined clearable class="col" :placeholder="t('Search parameter')">
+    <q-card-section v-if="cameraConfig" class="row items-center q-col-gutter-sm q-py-none">
+      <q-input v-model="filter" dense outlined clearable class="col-12 col-sm" :placeholder="t('Search parameter')">
         <template #prepend><q-icon name="sym_o_search" /></template>
       </q-input>
-      <q-toggle v-model="onlySettable" dense :label="t('Only settable')" />
-      <q-toggle v-model="onlySelected" dense :label="t('Only selected')" />
+      <div class="col-auto row q-gutter-md">
+        <q-toggle v-model="onlySettable" dense :label="t('Only settable')" />
+        <q-toggle v-model="onlySelected" dense :label="t('Only selected')" />
+      </div>
     </q-card-section>
 
     <q-separator v-if="cameraConfig" class="q-mt-sm" />
@@ -134,11 +136,21 @@
           <q-item-label header class="text-weight-bold text-warning">{{ t('Not reported by the camera') }}</q-item-label>
           <q-item v-for="parameter in unknownParameters" :key="parameter.name">
             <q-item-section side><q-icon name="sym_o_warning" color="warning" /></q-item-section>
-            <q-item-section>
+            <q-item-section :class="{ 'text-strike text-grey-6': removed.has(parameter.name) }">
               <q-item-label> <code>{{ parameter.name }}</code> = {{ parameter.value }} </q-item-label>
               <q-item-label caption>
-                {{ t('This camera does not have this parameter in the current mode. The entry stays unchanged, setting it will fail.') }}
+                {{ t('This camera does not have this parameter in the current mode, setting it will fail.') }}
               </q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-btn
+                flat
+                dense
+                no-caps
+                :icon="removed.has(parameter.name) ? 'sym_o_undo' : 'sym_o_delete'"
+                :label="removed.has(parameter.name) ? t('Keep') : t('Remove')"
+                @click="toggleRemoved(parameter.name)"
+              />
             </q-item-section>
           </q-item>
         </template>
@@ -254,9 +266,20 @@ const unknownParameters = computed(() => {
   return props.parameters.filter(parameter => parameter.name !== '' && !names.has(parameter.name))
 })
 
+// entries the camera does not know, to be removed on apply
+const removed = ref(new Set<string>())
+const toggleRemoved = (name: string) => {
+  if (removed.value.has(name)) removed.value.delete(name)
+  else removed.value.add(name)
+}
+
 const checkedCount = computed(() => [...selection.value.values()].filter(selected => selected.checked).length)
 
-const apply = () => emit('apply', mergeSelection(props.parameters, selection.value))
+const apply = () =>
+  emit(
+    'apply',
+    mergeSelection(props.parameters, selection.value).filter(parameter => !removed.value.has(parameter.name))
+  )
 </script>
 
 <style scoped>

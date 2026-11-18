@@ -630,6 +630,18 @@ export type GroupCameraGphoto2 = {
      */
     backend_type: 'Gphoto2';
     /**
+     * Parameter Configuration
+     *
+     * How the parameter sets are configured. 'manual': enter names and values of the parameters yourself. 'camera': read the available parameters and values from the connected camera and choose them in the admin UI (camera needs to be connected while configuring). The parameter sets are applied the same way in both cases.
+     */
+    parameter_configuration: 'manual' | 'camera';
+    /**
+     * Camera Mode At Configuration
+     *
+     * Exposure mode of the camera when the parameter sets were chosen from the camera, as 'name=value' (e.g. 'autoexposuremode=Manual'). Set by the admin UI. The available values depend on the mode, so the app warns if the camera is in a different mode.
+     */
+    camera_mode_at_configuration: string;
+    /**
      * Parameterset Device Init
      */
     parameterset_device_init: Array<Gphoto2Parameters>;
