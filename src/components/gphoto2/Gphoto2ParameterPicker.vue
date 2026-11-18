@@ -37,7 +37,7 @@
           {{ t('Mode') }}: {{ cameraConfig.mode.value }}
           <q-tooltip>{{ cameraConfig.mode.label }} ({{ cameraConfig.mode.name }})</q-tooltip>
         </q-chip>
-        <q-chip v-else square icon="sym_o_help" color="grey-4">{{ t('Mode not detected') }}</q-chip>
+        <q-chip v-else square icon="sym_o_help" color="grey-4" text-color="black">{{ t('Mode not detected') }}</q-chip>
         <q-space />
         <span v-if="readAt" class="text-caption text-grey-7">{{ t('Read at {time}', { time: readAt.toLocaleTimeString() }) }}</span>
         <q-btn flat dense icon="sym_o_refresh" :label="t('Read again')" @click="load(true)" />

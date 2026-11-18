@@ -14,7 +14,7 @@
             {{ t('Mode') }}: {{ cameraConfig.mode.value }}
             <q-tooltip>{{ cameraConfig.mode.label }} ({{ cameraConfig.mode.name }})</q-tooltip>
           </q-chip>
-          <q-chip v-else dense square color="grey-4">{{ t('Mode not detected') }}</q-chip>
+          <q-chip v-else dense square color="grey-4" text-color="black">{{ t('Mode not detected') }}</q-chip>
         </template>
         <span v-else class="text-negative">{{ t('Camera not reachable') }}</span>
         <q-space />
@@ -22,7 +22,7 @@
         <q-btn flat dense icon="sym_o_refresh" :label="t('Read again')" :loading="loading" @click="load(true)" />
       </q-card-section>
 
-      <q-banner v-if="error && !loading" dense class="bg-orange-1">
+      <q-banner v-if="error && !loading" dense class="bg-orange-1 text-black">
         <template #avatar><q-icon name="sym_o_warning" color="warning" /></template>
         {{ t('The camera could not be read. The saved parameters are shown, editing needs the camera.') }}
         <div class="text-caption text-grey-8">{{ error }}</div>
@@ -35,7 +35,7 @@
         </div>
       </q-banner>
 
-      <q-banner v-if="modeMismatch" dense class="bg-orange-1">
+      <q-banner v-if="modeMismatch" dense class="bg-orange-1 text-black">
         <template #avatar><q-icon name="sym_o_warning" color="warning" /></template>
         {{ t('The parameter sets were chosen in mode "{saved}", the camera is in mode "{current}" now.', modeMismatch) }}
         <div class="text-caption text-grey-8">
@@ -62,6 +62,7 @@
                 dense
                 square
                 :color="issue(parameter) ? 'orange-2' : 'grey-3'"
+                text-color="black"
                 :icon="issue(parameter) ? 'sym_o_warning' : undefined"
               >
                 <code>{{ parameter.name }}</code>&nbsp;= {{ parameter.value }}
