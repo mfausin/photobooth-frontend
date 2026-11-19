@@ -73,14 +73,14 @@ export interface Selection {
 /**
  * Merge the selection made in the picker into a parameter set.
  * - checked: entry is enabled with the chosen value (added at the end if new)
- * - unchecked: an existing entry is disabled, not deleted (keeps the note)
+ * - unchecked: the entry is removed from the set
  * - entries the camera did not report stay as they are
  */
 export function mergeSelection(parameters: Gphoto2Parameters[], selection: Map<string, Selection>): Gphoto2Parameters[] {
-  const result = parameters.map(parameter => {
+  const result = parameters.flatMap(parameter => {
     const selected = selection.get(parameter.name)
-    if (!selected) return { ...parameter }
-    return selected.checked ? { ...parameter, enabled: true, value: selected.value } : { ...parameter, enabled: false }
+    if (!selected) return [{ ...parameter }]
+    return selected.checked ? [{ ...parameter, enabled: true, value: selected.value }] : []
   })
 
   const existing = new Set(parameters.map(parameter => parameter.name))
