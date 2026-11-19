@@ -69,9 +69,6 @@
                 <q-tooltip v-if="issue(parameter)">{{ issue(parameter) }}</q-tooltip>
               </q-chip>
               <span v-if="!enabledParameters(set.key).length" class="text-caption text-grey-6">{{ t('No parameters') }}</span>
-              <span v-if="disabledCount(set.key)" class="text-caption text-grey-6 self-center">
-                {{ t('+{count} disabled', { count: disabledCount(set.key) }) }}
-              </span>
             </div>
           </div>
           <q-btn
@@ -167,7 +164,6 @@ const modeMismatch = computed(() => {
 
 const parametersOf = (key: SetKey): Gphoto2Parameters[] => props.config[key] ?? []
 const enabledParameters = (key: SetKey) => parametersOf(key).filter(parameter => parameter.enabled)
-const disabledCount = (key: SetKey) => parametersOf(key).filter(parameter => !parameter.enabled).length
 
 const issue = (parameter: Gphoto2Parameters): string | null => {
   if (!cameraConfig.value) return null

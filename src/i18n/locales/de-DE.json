@@ -322,7 +322,6 @@
   "Available values depend on the mode. Set the mode dial back or choose the parameters again.": "Die verfügbaren Werte hängen vom Modus ab. Stelle das Moduswahlrad zurück oder wähle die Parameter neu.",
   "Parameter sets chosen in mode: {mode}": "Parameter-Sets ausgewählt im Modus: {mode}",
   "No parameters": "Keine Parameter",
-  "+{count} disabled": "+{count} deaktiviert",
   "Edit": "Bearbeiten",
   "Needs the camera, read it again first.": "Braucht die Kamera, zuerst neu auslesen.",
   "Camera start": "Kamerastart",

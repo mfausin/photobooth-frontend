@@ -322,7 +322,6 @@
   "Available values depend on the mode. Set the mode dial back or choose the parameters again.": "Available values depend on the mode. Set the mode dial back or choose the parameters again.",
   "Parameter sets chosen in mode: {mode}": "Parameter sets chosen in mode: {mode}",
   "No parameters": "No parameters",
-  "+{count} disabled": "+{count} disabled",
   "Edit": "Edit",
   "Needs the camera, read it again first.": "Needs the camera, read it again first.",
   "Camera start": "Camera start",
