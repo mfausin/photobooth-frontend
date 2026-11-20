@@ -51,6 +51,32 @@
             </q-item-label>
             <q-item-label caption>{{ $t('{count} jobs in queue', { count: printer.queued_jobs }) }}</q-item-label>
 
+            <q-item-label v-if="hasMedia(printer)" class="q-mt-sm printer-control-card__media">
+              <div class="row items-center no-wrap q-gutter-x-xs">
+                <q-icon name="sym_o_receipt_long" />
+                <span v-if="printer.media_remaining !== null && printer.media_remaining !== undefined" class="text-weight-medium">
+                  {{ $t('{count} prints left', { count: printer.media_remaining }) }}
+                </span>
+                <span v-else-if="printer.media_level !== null && printer.media_level !== undefined" class="text-weight-medium">
+                  {{ printer.media_level }} %
+                </span>
+                <span v-if="printer.media_name" class="text-grey-7 ellipsis">· {{ printer.media_name }}</span>
+              </div>
+              <q-linear-progress
+                v-if="printer.media_level !== null && printer.media_level !== undefined"
+                class="q-mt-xs"
+                rounded
+                size="8px"
+                :value="printer.media_level / 100"
+                :color="mediaColor(printer)"
+                track-color="grey-3"
+              />
+              <div class="text-caption text-grey-7 q-mt-xs">
+                {{ $t('Reported by the printer at the last print')
+                }}<template v-if="printer.media_updated"> ({{ formatTime(printer.media_updated) }})</template>.
+              </div>
+            </q-item-label>
+
             <q-item-label class="q-mt-sm row q-gutter-sm">
               <q-btn
                 no-caps
@@ -145,6 +171,12 @@ interface PrinterInfo {
   connection?: 'usb' | 'network' | 'other'
   /** only known for USB printers: is the device plugged in right now */
   connected?: boolean | null
+  /** media/supply as reported by the driver at the last print (older plugin versions do not send these) */
+  media_name?: string
+  media_level?: number | null
+  media_remaining?: number | null
+  media_message?: string
+  media_updated?: number | null
 }
 
 const API = '/api/admin/printer-control/printers'
@@ -165,6 +197,16 @@ const needsResume = (p: PrinterInfo) => p.state === 'stopped' || !p.accepting_jo
 const isAutoResume = (p: PrinterInfo) => p.error_policy === 'retry-current-job' || p.error_policy === 'retry-job'
 // "-report" reasons are informational (e.g. offline-report on many USB printers), only show warnings and errors
 const problemReasons = (p: PrinterInfo) => p.state_reasons.filter(r => r.endsWith('-error') || r.endsWith('-warning'))
+const hasMedia = (p: PrinterInfo) => p.media_remaining != null || p.media_level != null
+// Gutenprint reports 10 % as the low level
+const mediaColor = (p: PrinterInfo) => ((p.media_level ?? 100) <= 0 ? 'negative' : (p.media_level ?? 100) <= 10 ? 'warning' : 'positive')
+const formatTime = (unixSeconds: number) => {
+  const date = new Date(unixSeconds * 1000)
+  const sameDay = date.toDateString() === new Date().toDateString()
+  return sameDay
+    ? date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    : date.toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })
+}
 
 const load = async () => {
   loading.value = true

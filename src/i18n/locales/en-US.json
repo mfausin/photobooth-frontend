@@ -289,5 +289,7 @@
   "Done.": "Done.",
   "Not connected": "Not connected",
   "connected via USB": "connected via USB",
-  "The printer is not plugged in via USB. Check cable and power.": "The printer is not plugged in via USB. Check cable and power."
+  "The printer is not plugged in via USB. Check cable and power.": "The printer is not plugged in via USB. Check cable and power.",
+  "{count} prints left": "{count} prints left",
+  "Reported by the printer at the last print": "Reported by the printer at the last print"
 }
