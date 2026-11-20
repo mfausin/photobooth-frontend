@@ -289,5 +289,7 @@
   "Done.": "Erledigt.",
   "Not connected": "Nicht verbunden",
   "connected via USB": "per USB verbunden",
-  "The printer is not plugged in via USB. Check cable and power.": "Der Drucker ist nicht per USB angeschlossen. Kabel und Strom prüfen."
+  "The printer is not plugged in via USB. Check cable and power.": "Der Drucker ist nicht per USB angeschlossen. Kabel und Strom prüfen.",
+  "{count} prints left": "noch {count} Drucke",
+  "Reported by the printer at the last print": "Vom Drucker gemeldet beim letzten Druck"
 }
