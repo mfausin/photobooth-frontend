@@ -337,5 +337,7 @@
   "The app cannot set this parameter.": "Die App kann diesen Parameter nicht setzen.",
   "This value is not available in the current mode.": "Dieser Wert ist im aktuellen Modus nicht verfügbar.",
   "This camera does not have this parameter in the current mode, setting it will fail.": "Diese Kamera hat diesen Parameter im aktuellen Modus nicht, das Setzen wird fehlschlagen.",
-  "Keep": "Behalten"
+  "Keep": "Behalten",
+  "{count} prints left": "noch {count} Drucke",
+  "Reported by the printer at the last print": "Vom Drucker gemeldet beim letzten Druck"
 }
